@@ -1,6 +1,6 @@
 #Requires -Version 5.1
 <#
-    Controle da aplicacao Visao Vivo ERB no Windows (equivalente ao app-control.sh do AlmaLinux)
+    Controle da aplicacao Visao ERB no Windows (equivalente ao app-control.sh do AlmaLinux)
     Uso:
         .\app-control.ps1            -> abre o menu interativo
         .\app-control.ps1 start      -> inicia a aplicacao
@@ -150,7 +150,7 @@ function Show-Menu {
     while ($true) {
         Clear-Host
         Write-Host "================================="
-        Write-Host " Visao Vivo ERB - Controle"
+        Write-Host " Visao ERB - Controle"
         Write-Host "================================="
         Show-Status
         Write-Host ""

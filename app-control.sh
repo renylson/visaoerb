@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Controle de start/stop/status/logs da aplicação (Linux/macOS).
+# Existe um script equivalente para Windows em app-control.ps1 — o projeto
+# foi desenvolvido originalmente em AlmaLinux e depois migrado para uso
+# local em Windows, então os dois convivem mantendo paridade de comandos.
 set -euo pipefail
 
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -145,9 +149,9 @@ capture_action() {
   local output
 
   if output="$(run_action "$action" 2>&1)"; then
-    show_message "Visao Vivo ERB" "$output"
+    show_message "Visao ERB" "$output"
   else
-    show_message "Visao Vivo ERB - erro" "$output"
+    show_message "Visao ERB - erro" "$output"
   fi
 }
 
@@ -156,7 +160,7 @@ gui_menu() {
     local option
     option="$(
       zenity --list \
-        --title="Visao Vivo ERB" \
+        --title="Visao ERB" \
         --text="Escolha uma acao para a aplicacao" \
         --width=520 \
         --height=360 \
@@ -181,7 +185,7 @@ terminal_menu() {
   while true; do
     clear 2>/dev/null || true
     echo "================================="
-    echo " Visao Vivo ERB - Controle"
+    echo " Visao ERB - Controle"
     echo "================================="
     status_app
     echo
