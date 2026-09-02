@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { GitFork, Search, Loader2, X, Trash2, Plus, CheckCircle2, AlertCircle, ArrowUp, ArrowDown } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import { useTheme } from '../ThemeContext';
+import { tipoEquip, TIPO_EQUIP_CONFIG as TIPO_EQUIP } from '../lib/status';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -10,28 +11,6 @@ const STATUS_CLS = {
   'planejado':  '#3B82F6',
   'desativado': '#EF4444',
 };
-
-const TIPO_EQUIP = {
-  hl4:  { label: 'HL4',  border: '#7C3AED', bg: '#3B0764' },
-  hl5d: { label: 'HL5D', border: '#8B5CF6', bg: '#4C1D95' },
-  hl5g: { label: 'HL5G', border: '#A78BFA', bg: '#5B21B6' },
-  gwc:  { label: 'GWC',  border: '#2563EB', bg: '#1E3A5F' },
-  gwd:  { label: 'GWD',  border: '#3B82F6', bg: '#1D4ED8' },
-  gws:  { label: 'GWS',  border: '#60A5FA', bg: '#2563EB' },
-  outro:{ label: '?',    border: '#6B7280', bg: '#374151' },
-};
-
-function tipoEquip(h) {
-  if (!h) return 'outro';
-  const s = h.toLowerCase();
-  if (s.includes('-hl4-'))  return 'hl4';
-  if (s.includes('-hl5d-')) return 'hl5d';
-  if (s.includes('-hl5g-')) return 'hl5g';
-  if (s.includes('-gwc-'))  return 'gwc';
-  if (s.includes('-gwd-'))  return 'gwd';
-  if (s.includes('-gws-'))  return 'gws';
-  return 'outro';
-}
 
 // Tipos que só aceitam upstream (sem downstream)
 const APENAS_UPSTREAM = ['hl5g', 'gws'];

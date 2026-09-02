@@ -12,12 +12,7 @@ import {
 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import { useTheme } from '../ThemeContext';
-
-const STATUS_CLS = {
-  'ativado':    'text-[#22C55E]',
-  'planejado':  'text-[#3B82F6]',
-  'desativado': 'text-[#EF4444]',
-};
+import { statusEquipTextClass, tipoEquip, TIPO_EQUIP_CONFIG as TIPO_CONFIG } from '../lib/status';
 
 // Combobox com autocomplete para busca por hostname
 function BuscaCombobox({ value, onChange, onConsultar, loading }) {
@@ -64,12 +59,7 @@ function BuscaCombobox({ value, onChange, onConsultar, loading }) {
                         rounded-xl shadow-2xl overflow-hidden max-h-56 overflow-y-auto scrollbar-thin"
              style={{ minWidth: '480px' }}>
           {opts.map(o => {
-            const cfg = TIPO_CONFIG[o.sigla?.toLowerCase().includes('-hl4-') ? 'hl4'
-              : o.sigla?.toLowerCase().includes('-hl5d-') ? 'hl5d'
-              : o.sigla?.toLowerCase().includes('-hl5g-') ? 'hl5g'
-              : o.sigla?.toLowerCase().includes('-gwc-') ? 'gwc'
-              : o.sigla?.toLowerCase().includes('-gwd-') ? 'gwd'
-              : o.sigla?.toLowerCase().includes('-gws-') ? 'gws' : 'outro'] || TIPO_CONFIG.outro;
+            const cfg = TIPO_CONFIG[tipoEquip(o.sigla)] || TIPO_CONFIG.outro;
             return (
               <button key={o.sigla}
                       onClick={() => { onChange(o.sigla); setQuery(''); setOpen(false); onConsultar(o.sigla); }}
@@ -90,20 +80,6 @@ function BuscaCombobox({ value, onChange, onConsultar, loading }) {
     </div>
   );
 }
-
-// Cores por tipo de equipamento
-const TIPO_CONFIG = {
-  hl4:   { bg: '#3B0764', border: '#7C3AED', label: 'HL4',   familia: 'Fusion'  },
-  hl5d:  { bg: '#4C1D95', border: '#8B5CF6', label: 'HL5D',  familia: 'Fusion'  },
-  hl5g:  { bg: '#5B21B6', border: '#A78BFA', label: 'HL5G',  familia: 'Fusion'  },
-  gwc:   { bg: '#1E3A5F', border: '#2563EB', label: 'GWC',   familia: 'Legado'  },
-  gwd:   { bg: '#1D4ED8', border: '#3B82F6', label: 'GWD',   familia: 'Legado'  },
-  gws:   { bg: '#2563EB', border: '#60A5FA', label: 'GWS',   familia: 'Legado'  },
-  outro: { bg: '#374151', border: '#6B7280', label: '?',     familia: 'Outros'  },
-};
-
-
-// Combobox com busca na API
 
 // Painel lateral do nó selecionado
 function NodePanel({ no, onClose }) {
@@ -128,7 +104,7 @@ function NodePanel({ no, onClose }) {
         {no.status && (
           <div className="flex items-center gap-2">
             <Activity size={13} className="text-[#6B7280]" />
-            <span className={`text-sm font-semibold ${STATUS_CLS[(no.status||'').toLowerCase()] || 'text-[#6B7280]'}`}>
+            <span className={`text-sm font-semibold ${statusEquipTextClass(no.status)}`}>
               {no.status}
             </span>
           </div>
@@ -192,7 +168,7 @@ function CustomNode({ data }) {
         <div className="text-[10px] font-bold mb-1" style={{ color: cfg.border }}>{cfg.label}</div>
         <div className="text-white font-mono text-xs break-all leading-tight">{data.label}</div>
         {data.status && (
-          <div className={`text-[10px] mt-1 font-semibold ${STATUS_CLS[(data.status||'').toLowerCase()] || 'text-[#6B7280]'}`}>
+          <div className={`text-[10px] mt-1 font-semibold ${statusEquipTextClass(data.status)}`}>
             {data.status}
           </div>
         )}
@@ -429,7 +405,7 @@ function ArvoreNo({ no, filhos, todos, arestas, onSelect, nivel = 0 }) {
         </span>
         <span className="text-white font-mono text-xs truncate">{no.id}</span>
         {no.status && (
-          <span className={`ml-auto text-[10px] flex-shrink-0 ${STATUS_CLS[(no.status||'').toLowerCase()] || 'text-[#6B7280]'}`}>
+          <span className={`ml-auto text-[10px] flex-shrink-0 ${statusEquipTextClass(no.status)}`}>
             {no.status}
           </span>
         )}

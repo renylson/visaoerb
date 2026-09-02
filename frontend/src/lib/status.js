@@ -47,3 +47,30 @@ export function statusEquipTextClass(status) {
 export function tipoServicoClass(tipo) {
   return TIPO_SERVICO_CLASS[tipo] || TIPO_SERVICO_CLASS['Outros'];
 }
+
+// Cores/label por tipo de equipamento de transporte (Topologia, Vizinhos).
+// Espelha services/classificar.js#tipoEquip no backend — a mesma convenção de
+// nomenclatura de hostname (sufixo -hl4-/-hl5d-/etc) é reaplicada aqui porque
+// a UI de grafo precisa classificar hostnames vindos de respostas já
+// resolvidas, sem round-trip ao servidor.
+export const TIPO_EQUIP_CONFIG = {
+  hl4:   { bg: '#3B0764', border: '#7C3AED', label: 'HL4',  familia: 'Fusion' },
+  hl5d:  { bg: '#4C1D95', border: '#8B5CF6', label: 'HL5D', familia: 'Fusion' },
+  hl5g:  { bg: '#5B21B6', border: '#A78BFA', label: 'HL5G', familia: 'Fusion' },
+  gwc:   { bg: '#1E3A5F', border: '#2563EB', label: 'GWC',  familia: 'Legado' },
+  gwd:   { bg: '#1D4ED8', border: '#3B82F6', label: 'GWD',  familia: 'Legado' },
+  gws:   { bg: '#2563EB', border: '#60A5FA', label: 'GWS',  familia: 'Legado' },
+  outro: { bg: '#374151', border: '#6B7280', label: '?',    familia: 'Outros' },
+};
+
+export function tipoEquip(hostname) {
+  if (!hostname) return 'outro';
+  const h = hostname.toLowerCase();
+  if (h.includes('-hl4-')) return 'hl4';
+  if (h.includes('-hl5d-')) return 'hl5d';
+  if (h.includes('-hl5g-')) return 'hl5g';
+  if (h.includes('-gwc-')) return 'gwc';
+  if (h.includes('-gwd-')) return 'gwd';
+  if (h.includes('-gws-')) return 'gws';
+  return 'outro';
+}
