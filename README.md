@@ -109,9 +109,7 @@ curl -X POST http://localhost:3000/api/upload/oe -F "arquivo=@seed/oe.xml"
 ### Scripts de controle (dev diário)
 
 O projeto tem scripts equivalentes para Linux (`app-control.sh`) e Windows
-(`app-control.ps1`) — foi desenvolvido originalmente em AlmaLinux e depois
-migrado para uso local em Windows, então os dois convivem mantendo paridade
-de comandos:
+(`app-control.ps1`):
 
 ```bash
 ./app-control.sh start|stop|restart|status|logs|open     # Linux/macOS
@@ -149,42 +147,6 @@ documentação depois que eu já sabia o que precisava ser feito e por quê.
 Registro isso aqui porque acho mais honesto do que fingir que não usei, e
 porque saber orquestrar essas ferramentas é uma habilidade tão real quanto
 escrever o código à mão.
-
-**O que foi decisão minha, do início ao fim:** a arquitetura do domínio (como
-ERB, equipamentos, OEs e topologia se relacionam — inclusive a regra de
-classificação de inconsistência que cruza status de OE com status de
-equipamento), o que precisava ser corrigido antes de publicar, o escopo do
-refactor, o que manter e o que descartar, e toda revisão do que a IA propôs.
-
-**Onde a IA acelerou o trabalho, sob minha direção:**
-
-- **Debugging real:** ao migrar o projeto de Linux para Windows, a aplicação
-  carregava com tela preta. Investigação (com Playwright headless, direto no
-  navegador) mostrou um `TypeError` no React causado por um endpoint da API
-  retornando 500. A causa raiz era mais funda: `db.js` criava as tabelas
-  `erb` e `equipamentos` sem as colunas `GENERATED ALWAYS AS` que derivam
-  `sigla_erb`/`uf_sigla_erb` — colunas que o resto do código já assumia que
-  existiam. Corrigido comparando o schema com um dump real do sistema
-  original para confirmar a regra de derivação correta.
-- Ainda durante o refactor de rotas, ao trocar o roteamento client-side
-  hand-rolled por React Router, apareceu um **bug de produção pré-existente**:
-  o prefixo de rota `/relatorios` era usado tanto pelo frontend (uma página)
-  quanto pelo backend (a API de relatórios), então um refresh direto em
-  `/relatorios/status-migracao-erb` fazia o Express responder com JSON em vez
-  do HTML do React. Só ficou visível porque o React Router expôs a navegação
-  por URL de um jeito que o roteador antigo mascarava. Corrigido movendo toda
-  a API para `/api/*`.
-- Um terceiro bug real surgiu **durante** o próprio refactor de dedup de
-  componentes: mover a chamada de um hook (`useSortableTable`) para depois de
-  um `return null` condicional violou as regras de hooks do React — pego pelo
-  eslint, corrigido, e verificado visualmente antes do commit.
-- Extração de duplicação (lógica de classificação repetida em 2-3 lugares no
-  backend, mapas de cor/status repetidos em 3-5 componentes no frontend) e
-  introdução de uma camada de serviço separando rotas HTTP de regra de
-  negócio.
-- Geração da suíte de testes (unitários + integração contra Postgres real)
-  e do workflow de CI.
-- Redação deste README.
 
 Cada etapa foi testada manualmente (build, smoke test via navegador
 automatizado, `curl` nos endpoints) antes de eu aceitar a mudança — nada foi
