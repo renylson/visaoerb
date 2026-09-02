@@ -1,64 +1,24 @@
 import { useState } from 'react';
-import { ArrowUpDown, ChevronDown, ChevronUp } from 'lucide-react';
-
-const STATUS_OE = {
-  'ativada':   'bg-[#22C55E]/15 text-[#22C55E] border-[#22C55E]/25',
-  'a migrar':  'bg-[#F59E0B]/15 text-[#F59E0B] border-[#F59E0B]/25',
-  'à ativar':  'bg-[#3B82F6]/15 text-[#3B82F6] border-[#3B82F6]/25',
-  'migrada':   'bg-[#6B7280]/15 text-[#6B7280] border-[#6B7280]/25',
-};
-const STATUS_EQUIP = {
-  'ativado':    'text-[#22C55E]',
-  'planejado':  'text-[#3B82F6]',
-  'desativado': 'text-[#EF4444]',
-};
-const TIPO_COLORS = {
-  '2G':                    'bg-[#9C27FF]/15 text-[#C77DFF] border-[#9C27FF]/25',
-  '3G':                    'bg-[#9C27FF]/15 text-[#C77DFF] border-[#9C27FF]/25',
-  '4G':                    'bg-[#9C27FF]/15 text-[#C77DFF] border-[#9C27FF]/25',
-  '5G':                    'bg-[#22C55E]/15 text-[#22C55E] border-[#22C55E]/25',
-  'MULTISERVIÇO (3G+4G+5G)':'bg-[#9C27FF]/15 text-[#C77DFF] border-[#9C27FF]/25',
-  'SWA':                   'bg-[#0066FF]/15 text-[#4D9DFF] border-[#0066FF]/25',
-  'Gerência Fonte':        'bg-[#00D4FF]/15 text-[#00D4FF] border-[#00D4FF]/25',
-  'DCN Rádio':             'bg-[#00D4FF]/15 text-[#00D4FF] border-[#00D4FF]/25',
-  'Outros':                'bg-[#6B7280]/15 text-[#6B7280] border-[#6B7280]/25',
-};
+import { useSortableTable } from '../hooks/useSortableTable';
+import { statusOeClass, statusEquipTextClass, tipoServicoClass } from '../lib/status';
+import SortableTh from './SortableTh';
 
 function Badge({ label, cls }) {
   return <span className={`inline-flex px-2 py-0.5 rounded-md text-xs font-semibold border ${cls}`}>{label}</span>;
 }
 
 export default function OeReportTable({ rows, showEquipStatus = true, pageSize = 50 }) {
-  const [sortField, setSortField] = useState('uf_sigla_erb');
-  const [sortDir, setSortDir]     = useState('asc');
-  const [page, setPage]           = useState(1);
+  const [page, setPage] = useState(1);
+  const { sortField, handleSort: sortHandler, sortedRows } = useSortableTable(rows, { initialField: 'uf_sigla_erb' });
 
-  const handleSort = (f) => {
-    if (sortField === f) setSortDir(d => d === 'asc' ? 'desc' : 'asc');
-    else { setSortField(f); setSortDir('asc'); }
+  const handleSort = (field) => {
+    sortHandler(field);
     setPage(1);
   };
 
-  const sorted = [...rows].sort((a, b) => {
-    const av = (a[sortField] ?? '').toString();
-    const bv = (b[sortField] ?? '').toString();
-    return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
-  });
-
-  const total  = sorted.length;
+  const total  = sortedRows.length;
   const pages  = Math.ceil(total / pageSize);
-  const sliced = sorted.slice((page - 1) * pageSize, page * pageSize);
-
-  const Th = ({ field, children }) => (
-    <th onClick={() => handleSort(field)}
-        className="px-3 py-3 text-left text-[10px] font-semibold text-[#6B7280] uppercase tracking-wider
-                   cursor-pointer hover:text-[#9C27FF] transition-colors select-none whitespace-nowrap">
-      <span className="flex items-center gap-1">
-        {children}
-        <ArrowUpDown size={10} className={sortField === field ? 'text-[#9C27FF]' : 'opacity-30'} />
-      </span>
-    </th>
-  );
+  const sliced = sortedRows.slice((page - 1) * pageSize, page * pageSize);
 
   return (
     <div>
@@ -68,22 +28,22 @@ export default function OeReportTable({ rows, showEquipStatus = true, pageSize =
           <table className="w-full text-sm">
             <thead className="bg-surface-2">
               <tr>
-                <Th field="uf_sigla_erb">UF</Th>
-                <Th field="sigla_erb">Sigla ERB</Th>
-                <Th field="nome_site">Nome do Site</Th>
-                <Th field="oe_status">Status OE</Th>
-                <Th field="tipo_servico">Tipo</Th>
-                <Th field="num_oe">Num OE</Th>
-                <Th field="eqpto_final">Eqpto Final</Th>
-                {showEquipStatus && <Th field="equip_status">Status Equip</Th>}
-                <Th field="equip_b">Equip B</Th>
+                <SortableTh field="uf_sigla_erb" sortField={sortField} onSort={handleSort} className="text-[10px]">UF</SortableTh>
+                <SortableTh field="sigla_erb" sortField={sortField} onSort={handleSort} className="text-[10px]">Sigla ERB</SortableTh>
+                <SortableTh field="nome_site" sortField={sortField} onSort={handleSort} className="text-[10px]">Nome do Site</SortableTh>
+                <SortableTh field="oe_status" sortField={sortField} onSort={handleSort} className="text-[10px]">Status OE</SortableTh>
+                <SortableTh field="tipo_servico" sortField={sortField} onSort={handleSort} className="text-[10px]">Tipo</SortableTh>
+                <SortableTh field="num_oe" sortField={sortField} onSort={handleSort} className="text-[10px]">Num OE</SortableTh>
+                <SortableTh field="eqpto_final" sortField={sortField} onSort={handleSort} className="text-[10px]">Eqpto Final</SortableTh>
+                {showEquipStatus && <SortableTh field="equip_status" sortField={sortField} onSort={handleSort} className="text-[10px]">Status Equip</SortableTh>}
+                <SortableTh field="equip_b" sortField={sortField} onSort={handleSort} className="text-[10px]">Equip B</SortableTh>
               </tr>
             </thead>
             <tbody className="divide-y divide-surface-3">
               {sliced.map((r, i) => {
-                const oeStatusCls = STATUS_OE[(r.oe_status||'').toLowerCase()] || STATUS_OE['migrada'];
-                const tipoCls     = TIPO_COLORS[r.tipo_servico] || TIPO_COLORS['Outros'];
-                const equipCls    = STATUS_EQUIP[(r.equip_status||'').toLowerCase()] || 'text-[#6B7280]';
+                const oeStatusCls = statusOeClass(r.oe_status);
+                const tipoCls     = tipoServicoClass(r.tipo_servico);
+                const equipCls    = statusEquipTextClass(r.equip_status);
                 return (
                   <tr key={i} className="bg-surface hover:bg-surface-2 transition-colors">
                     <td className="px-3 py-2 text-[#B3B3B3] text-xs font-semibold whitespace-nowrap">{r.uf_sigla_erb}</td>

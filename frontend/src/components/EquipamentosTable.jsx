@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import { Copy, Check, Server, ArrowUpDown } from 'lucide-react';
-
-const STATUS_EQUIP = {
-  'ativado':    'bg-[#22C55E]/15 text-[#22C55E] border-[#22C55E]/25',
-  'planejado':  'bg-[#3B82F6]/15 text-[#3B82F6] border-[#3B82F6]/25',
-  'desativado': 'bg-[#EF4444]/15 text-[#EF4444] border-[#EF4444]/25',
-};
+import { Copy, Check, Server } from 'lucide-react';
+import { useSortableTable } from '../hooks/useSortableTable';
+import { statusEquipClass } from '../lib/status';
+import SortableTh from './SortableTh';
 
 function CopyIP({ ip }) {
   const [copied, setCopied] = useState(false);
@@ -32,34 +29,11 @@ function fmtDate(val) {
 }
 
 export default function EquipamentosTable({ equipamentos }) {
-  const [sortField, setSortField] = useState(null);
-  const [sortDir, setSortDir]     = useState('asc');
+  const { sortField, handleSort, sortedRows } = useSortableTable(equipamentos || []);
 
   if (!equipamentos?.length) return null;
 
-  const handleSort = (field) => {
-    if (sortField === field) setSortDir(d => d === 'asc' ? 'desc' : 'asc');
-    else { setSortField(field); setSortDir('asc'); }
-  };
-
-  let rows = [...equipamentos];
-  if (sortField) {
-    rows.sort((a, b) => {
-      const av = (a[sortField] ?? '').toString();
-      const bv = (b[sortField] ?? '').toString();
-      return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
-    });
-  }
-
-  const Th = ({ field, children }) => (
-    <th onClick={() => handleSort(field)}
-        className="px-3 py-3 text-left text-xs font-semibold text-[#6B7280] uppercase tracking-wider cursor-pointer hover:text-brand-light transition-colors select-none whitespace-nowrap">
-      <span className="flex items-center gap-1">
-        {children}
-        <ArrowUpDown size={11} className={sortField === field ? 'text-brand-light' : 'opacity-30'} />
-      </span>
-    </th>
-  );
+  const rows = sortedRows;
 
   return (
     <section className="mb-6">
@@ -74,23 +48,23 @@ export default function EquipamentosTable({ equipamentos }) {
           <table className="w-full text-sm">
             <thead className="bg-surface-2">
               <tr>
-                <Th field="sigla">Hostname</Th>
-                <Th field="status">Status</Th>
-                <Th field="id_equip_trans">ID SMTX</Th>
-                <Th field="fabricante">Fabricante</Th>
-                <Th field="modelo">Modelo</Th>
+                <SortableTh field="sigla" sortField={sortField} onSort={handleSort}>Hostname</SortableTh>
+                <SortableTh field="status" sortField={sortField} onSort={handleSort}>Status</SortableTh>
+                <SortableTh field="id_equip_trans" sortField={sortField} onSort={handleSort}>ID SMTX</SortableTh>
+                <SortableTh field="fabricante" sortField={sortField} onSort={handleSort}>Fabricante</SortableTh>
+                <SortableTh field="modelo" sortField={sortField} onSort={handleSort}>Modelo</SortableTh>
                 <th className="px-3 py-3 text-left text-xs font-semibold text-[#6B7280] uppercase tracking-wider whitespace-nowrap">
                   IP
                 </th>
-                <Th field="oe_ativacao">OE Ativação</Th>
-                <Th field="data_ativacao">Dt. Ativação</Th>
-                <Th field="oe_desativacao">OE Desativ.</Th>
-                <Th field="data_desativacao">Dt. Desativ.</Th>
+                <SortableTh field="oe_ativacao" sortField={sortField} onSort={handleSort}>OE Ativação</SortableTh>
+                <SortableTh field="data_ativacao" sortField={sortField} onSort={handleSort}>Dt. Ativação</SortableTh>
+                <SortableTh field="oe_desativacao" sortField={sortField} onSort={handleSort}>OE Desativ.</SortableTh>
+                <SortableTh field="data_desativacao" sortField={sortField} onSort={handleSort}>Dt. Desativ.</SortableTh>
               </tr>
             </thead>
             <tbody className="divide-y divide-surface-3">
               {rows.map((eq, i) => {
-                const statusCls = STATUS_EQUIP[(eq.status || '').toLowerCase()] || 'bg-[#6B7280]/15 text-[#6B7280] border-[#6B7280]/25';
+                const statusCls = statusEquipClass(eq.status);
                 return (
                   <tr key={eq.id_equip_trans ?? i}
                       className="bg-surface hover:bg-surface-2 transition-colors">

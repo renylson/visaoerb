@@ -1,31 +1,15 @@
 import { useState } from 'react';
-import { CheckCircle2, XCircle, Clock, HelpCircle, ArrowUpDown, Network } from 'lucide-react';
-
-const STATUS_OE = {
-  'ativada':    'bg-[#22C55E]/15 text-[#22C55E] border-[#22C55E]/25',
-  'a migrar':   'bg-[#F59E0B]/15 text-[#F59E0B] border-[#F59E0B]/25',
-  'à ativar':   'bg-[#3B82F6]/15 text-[#3B82F6] border-[#3B82F6]/25',
-  'migrada':    'bg-[#6B7280]/15 text-[#6B7280] border-[#6B7280]/25',
-};
-
-const TIPO_COLORS = {
-  '2G':          'bg-[#9C27FF]/15 text-[#9C27FF] border-[#9C27FF]/25',
-  '3G':          'bg-[#9C27FF]/15 text-[#9C27FF] border-[#9C27FF]/25',
-  '4G':          'bg-[#9C27FF]/15 text-[#9C27FF] border-[#9C27FF]/25',
-  '5G':          'bg-[#9C27FF]/15 text-[#9C27FF] border-[#9C27FF]/25',
-  'MULTISERVIÇO (3G+4G+5G)': 'bg-[#9C27FF]/15 text-[#9C27FF] border-[#9C27FF]/25',
-  'SWA':         'bg-[#0066FF]/15 text-[#4D9DFF] border-[#0066FF]/25',
-  'Gerência Fonte': 'bg-[#00D4FF]/15 text-[#00D4FF] border-[#00D4FF]/25',
-  'DCN Rádio':   'bg-[#00D4FF]/15 text-[#00D4FF] border-[#00D4FF]/25',
-  'Outros':      'bg-[#6B7280]/15 text-[#6B7280] border-[#6B7280]/25',
-};
+import { CheckCircle2, XCircle, Clock, HelpCircle, Network } from 'lucide-react';
+import { useSortableTable } from '../hooks/useSortableTable';
+import { statusOeClass, tipoServicoClass } from '../lib/status';
+import SortableTh from './SortableTh';
 
 const FLAG_CONFIG = {
-  ok:       { Icon: CheckCircle2, color: 'text-[#22C55E]' },
-  migrado:  { Icon: CheckCircle2, color: 'text-[#3B82F6]' },
-  critico:  { Icon: XCircle,      color: 'text-[#EF4444]' },
-  pendente: { Icon: Clock,        color: 'text-[#F59E0B]' },
-  sem_eqpto:{ Icon: HelpCircle,   color: 'text-[#6B7280]' },
+  ok:        { Icon: CheckCircle2, color: 'text-[#22C55E]' },
+  migrado:   { Icon: CheckCircle2, color: 'text-[#3B82F6]' },
+  critico:   { Icon: XCircle,      color: 'text-[#EF4444]' },
+  pendente:  { Icon: Clock,        color: 'text-[#F59E0B]' },
+  sem_eqpto: { Icon: HelpCircle,   color: 'text-[#6B7280]' },
 };
 
 function Badge({ label, colorCls }) {
@@ -56,41 +40,20 @@ function FlagCell({ inconsistencia }) {
 }
 
 export default function OeTable({ oe }) {
-  const [sortField, setSortField] = useState(null);
-  const [sortDir, setSortDir]     = useState('asc');
   const [filterTipo, setFilterTipo] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
 
   if (!oe?.length) return null;
 
-  const tipos   = [...new Set(oe.map(r => r.tipo_servico))].sort();
+  const tipos    = [...new Set(oe.map(r => r.tipo_servico))].sort();
   const statuses = [...new Set(oe.map(r => r.status))].sort();
 
-  const handleSort = (field) => {
-    if (sortField === field) setSortDir(d => d === 'asc' ? 'desc' : 'asc');
-    else { setSortField(field); setSortDir('asc'); }
-  };
+  let filtered = oe;
+  if (filterTipo)   filtered = filtered.filter(r => r.tipo_servico === filterTipo);
+  if (filterStatus) filtered = filtered.filter(r => r.status === filterStatus);
 
-  let rows = [...oe];
-  if (filterTipo)   rows = rows.filter(r => r.tipo_servico === filterTipo);
-  if (filterStatus) rows = rows.filter(r => r.status === filterStatus);
-  if (sortField) {
-    rows.sort((a, b) => {
-      const av = (a[sortField] ?? '').toString();
-      const bv = (b[sortField] ?? '').toString();
-      return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
-    });
-  }
-
-  const Th = ({ field, children }) => (
-    <th onClick={() => handleSort(field)}
-        className="px-3 py-3 text-left text-xs font-semibold text-[#6B7280] uppercase tracking-wider cursor-pointer hover:text-brand-light transition-colors select-none whitespace-nowrap">
-      <span className="flex items-center gap-1">
-        {children}
-        <ArrowUpDown size={11} className={sortField === field ? 'text-brand-light' : 'opacity-30'} />
-      </span>
-    </th>
-  );
+  const { sortField, handleSort, sortedRows } = useSortableTable(filtered);
+  const rows = sortedRows;
 
   // Contadores por tipo
   const contadores = tipos.map(t => ({ tipo: t, count: oe.filter(r => r.tipo_servico === t).length }));
@@ -108,7 +71,7 @@ export default function OeTable({ oe }) {
             <button key={tipo} onClick={() => setFilterTipo(filterTipo === tipo ? '' : tipo)}
                     className={`px-2 py-0.5 rounded-md text-xs font-semibold border transition-all
                       ${filterTipo === tipo
-                        ? (TIPO_COLORS[tipo] || TIPO_COLORS.Outros)
+                        ? tipoServicoClass(tipo)
                         : 'bg-surface-2 text-[#6B7280] border-surface-3 hover:border-brand/40'}`}>
               {tipo} ({count})
             </button>
@@ -126,13 +89,13 @@ export default function OeTable({ oe }) {
           <table className="w-full text-sm">
             <thead className="bg-surface-2">
               <tr>
-                <Th field="num_oe">Num OE</Th>
-                <Th field="status">Status</Th>
-                <Th field="tipo_servico">Tipo</Th>
-                <Th field="tecnologia">Tecnologia</Th>
-                <Th field="rota">Rota</Th>
-                <Th field="equip_b">Equip B</Th>
-                <Th field="eqpto_final">Eqpto Final</Th>
+                <SortableTh field="num_oe" sortField={sortField} onSort={handleSort}>Num OE</SortableTh>
+                <SortableTh field="status" sortField={sortField} onSort={handleSort}>Status</SortableTh>
+                <SortableTh field="tipo_servico" sortField={sortField} onSort={handleSort}>Tipo</SortableTh>
+                <SortableTh field="tecnologia" sortField={sortField} onSort={handleSort}>Tecnologia</SortableTh>
+                <SortableTh field="rota" sortField={sortField} onSort={handleSort}>Rota</SortableTh>
+                <SortableTh field="equip_b" sortField={sortField} onSort={handleSort}>Equip B</SortableTh>
+                <SortableTh field="eqpto_final" sortField={sortField} onSort={handleSort}>Eqpto Final</SortableTh>
                 <th className="px-3 py-3 text-left text-xs font-semibold text-[#6B7280] uppercase tracking-wider">
                   Consistência
                 </th>
@@ -140,8 +103,8 @@ export default function OeTable({ oe }) {
             </thead>
             <tbody className="divide-y divide-surface-3">
               {rows.map((row, i) => {
-                const statusCls = STATUS_OE[(row.status || '').toLowerCase()] || STATUS_OE['migrada'];
-                const tipoCls   = TIPO_COLORS[row.tipo_servico] || TIPO_COLORS.Outros;
+                const statusCls = statusOeClass(row.status);
+                const tipoCls   = tipoServicoClass(row.tipo_servico);
                 return (
                   <tr key={row.id_rota ?? i}
                       className="bg-surface hover:bg-surface-2 transition-colors">
