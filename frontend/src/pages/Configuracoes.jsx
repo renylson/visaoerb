@@ -69,7 +69,7 @@ export default function Configuracoes() {
   const handleGradientChange = (val) => setTheme({ sidebarGradient: val });
 
   const gradientPresets = [
-    { label: 'Roxo Vivo',   value: 'linear-gradient(180deg, #660099 0%, #7F00B2 50%, #1E1E1E 100%)' },
+    { label: 'Roxo',        value: 'linear-gradient(180deg, #660099 0%, #7F00B2 50%, #1E1E1E 100%)' },
     { label: 'Azul Tech',   value: 'linear-gradient(180deg, #003399 0%, #0066FF 50%, #1E1E1E 100%)' },
     { label: 'Verde Rede',  value: 'linear-gradient(180deg, #065F46 0%, #059669 50%, #1E1E1E 100%)' },
     { label: 'Cinza Dark',  value: 'linear-gradient(180deg, #1F2937 0%, #374151 50%, #1E1E1E 100%)' },
@@ -101,7 +101,7 @@ export default function Configuracoes() {
             <Field label="Título da aba (página)" hint="Texto que aparece na aba do navegador">
               <input type="text" value={theme.pageTitle || ''}
                      onChange={e => setTheme({ pageTitle: e.target.value })}
-                     placeholder="Visão Vivo ERB"
+                     placeholder="Visão ERB"
                      className="w-full bg-[var(--color-surface2)] border border-[var(--color-border)] text-white text-sm rounded-lg px-3 py-2.5 focus:outline-none focus:border-[var(--color-primary-light)] placeholder-[#6B7280]" />
             </Field>
             <Field label="Subtítulo">

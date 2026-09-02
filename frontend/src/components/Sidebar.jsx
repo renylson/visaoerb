@@ -121,7 +121,7 @@ export default function Sidebar({ current }) {
       </nav>
 
       <div className="px-6 py-4 border-t border-white/10">
-        <p className="text-white/30 text-xs">v1.0 · Vivo Telecom</p>
+        <p className="text-white/30 text-xs">v1.0 · Visão ERB</p>
       </div>
     </aside>
   );

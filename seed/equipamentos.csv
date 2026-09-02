@@ -1,0 +1,9 @@
+idEquipTrans;Sigla;Nome;Utilizacao;Status;OEAtivacao;DataAtivacao;OEDesativacao;DataDesativacao;SiglaSite;NomedoSite;Proprietario;Fabricante;Modelo;TipoEquipamento;NShelfs;ReleaseSW;ReleaseHW;ReleaseOP;Rede;NNSAP;EnderecoIP;Configuracao;ProjetoInstalacao;siglaRack;NumRackSlot;Ocupacao
+50001;i-br-sp-fka-fka-hl5d-01;-;Exibir;Ativado;80001;01/03/2022;-;-;FKASP;JARDIM EXEMPLO;Operadora Fake;Huawei;ATN950D;Metro Ethernet;1;-;-;-;-;-;192.0.2.10/32;-;-;-;-;-
+50002;i-br-sp-fka-fka-hl5g-01;-;Exibir;Planejado;80002;-;-;-;FKASP;JARDIM EXEMPLO;Operadora Fake;Huawei;ATN910C-G;Metro Ethernet;1;-;-;-;-;-;192.0.2.11/32;-;-;-;-;-
+50003;m-br-sp-fka-fka-gws-01;-;Exibir;Desativado;80003;15/06/2020;80099;20/01/2024;FKASP;JARDIM EXEMPLO;Operadora Fake;Huawei;ATN910C-A;Metro Ethernet;0;-;-;-;-;-;192.0.2.12/32;-;-;-;-;-
+50004;i-br-sp-fkb-fkb-hl5d-01;-;Exibir;Ativado;80004;10/02/2023;-;-;FKBSP;VILA DEMONSTRACAO;Operadora Fake;Nokia;7750-SR;Metro Ethernet;1;-;-;-;-;-;192.0.2.20/32;-;-;-;-;-
+50005;m-br-sp-fkb-fkb-gwd-01;-;Exibir;Ativado;80005;05/05/2019;-;-;FKBSP;VILA DEMONSTRACAO;Operadora Fake;Nokia;7750-SR;Metro Ethernet;1;-;-;-;-;-;198.51.100.21/32;-;-;-;-;-
+50006;i-br-rj-fkc-fkc-hl5d-01;-;Exibir;Ativado;80006;22/09/2021;-;-;FKCRJ;BAIRRO SIMULADO;Operadora Fake;Huawei;ATN950D;Metro Ethernet;1;-;-;-;-;-;203.0.113.30/32;-;-;-;-;-
+50007;i-br-rj-fkc-fkc-hl4-01;-;Exibir;Desativado;80007;01/01/2018;80098;12/03/2023;FKCRJ;BAIRRO SIMULADO;Operadora Fake;Huawei;ATN950;Metro Ethernet;1;-;-;-;-;-;203.0.113.31/32;-;-;-;-;-
+50008;i-br-rj-fkd-fkd-hl5g-01;-;Exibir;Planejado;80008;-;-;-;FKDRJ;DISTRITO AMOSTRA;Operadora Fake;Nokia;7750-SR;Metro Ethernet;1;-;-;-;-;-;198.51.100.40/32;-;-;-;-;-

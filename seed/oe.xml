@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT>
+  <tabConsolidado>
+    <idRota>70001</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070001</NumEILD>
+    <NumOE>90001</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>COREFAKE</EquipA>
+    <EquipB>i-fka-01</EquipB>
+    <Rota>COREFAKE-FKASP</Rota>
+    <EqptoAprox>i-br-sp-core-core-hl3-01 - i-br-sp-fka-fka-hl5d-01</EqptoAprox>
+    <Tecnologia>null</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKASP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>RUA DAS AMOSTRAS, 100 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70002</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070002</NumEILD>
+    <NumOE>90002</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>RNCFAKE</EquipA>
+    <EquipB>WFKA1</EquipB>
+    <Rota>COREFAKE-FKASP</Rota>
+    <EqptoAprox>RNCFAKEVRI/01 - i-br-sp-fka-fka-hl5d-01</EqptoAprox>
+    <Tecnologia>WCDMA</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKASP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>RUA DAS AMOSTRAS, 100 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70003</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070003</NumEILD>
+    <NumOE>90003</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>CORE-MOVEL-SP</EquipA>
+    <EquipB>MFKA1</EquipB>
+    <Rota>COREFAKE-FKASP</Rota>
+    <EqptoAprox>5G-CORE-SP - i-br-sp-core-core-hl3-01 / i-br-sp-core-core-hl3-01 - i-br-sp-fka-fka-hl5d-01</EqptoAprox>
+    <Tecnologia>5G</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKASP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>RUA DAS AMOSTRAS, 100 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70004</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070004</NumEILD>
+    <NumOE>90004</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>B2B.CORE</EquipA>
+    <EquipB>m-br-sp-fka-fka-swa-01</EquipB>
+    <Rota>COREFAKE-FKASP</Rota>
+    <EqptoAprox>i-br-sp-core-core-hl3-01 - i-br-sp-fka-fka-hl5d-01</EqptoAprox>
+    <Tecnologia>null</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKASP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>RUA DAS AMOSTRAS, 100 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70005</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070005</NumEILD>
+    <NumOE>90005</NumOE>
+    <Status>À Ativar</Status>
+    <EquipA>RNCFAKE</EquipA>
+    <EquipB>WFKA2</EquipB>
+    <Rota>COREFAKE-FKASP</Rota>
+    <EqptoAprox>RNCFAKEVRI/02 - i-br-sp-fka-fka-hl5g-01</EqptoAprox>
+    <Tecnologia>WCDMA</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKASP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>RUA DAS AMOSTRAS, 100 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70006</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070006</NumEILD>
+    <NumOE>90006</NumOE>
+    <Status>Migrada</Status>
+    <EquipA>RNCFAKE</EquipA>
+    <EquipB>WFKA1</EquipB>
+    <Rota>COREFAKE-FKASP</Rota>
+    <EqptoAprox>m-br-sp-fka-fka-gwd-01 - m-br-sp-fka-fka-gwd-01</EqptoAprox>
+    <Tecnologia>WCDMA</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKASP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>RUA DAS AMOSTRAS, 100 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70007</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070007</NumEILD>
+    <NumOE>90007</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>COREFAKE</EquipA>
+    <EquipB>i-fkb-01</EquipB>
+    <Rota>COREFAKE-FKBSP</Rota>
+    <EqptoAprox>i-br-sp-core-core-hl3-01 - i-br-sp-fkb-fkb-hl5d-01</EqptoAprox>
+    <Tecnologia>null</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKBSP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>AVENIDA DOS TESTES, 200 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70008</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070008</NumEILD>
+    <NumOE>90008</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>CORE-MOVEL-SP</EquipA>
+    <EquipB>TFKB1</EquipB>
+    <Rota>COREFAKE-FKBSP</Rota>
+    <EqptoAprox>m-br-sp-core-core-gwc-01 - m-br-sp-fkb-fkb-gwd-01</EqptoAprox>
+    <Tecnologia>LTE</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKBSP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>AVENIDA DOS TESTES, 200 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70009</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070009</NumEILD>
+    <NumOE>90009</NumOE>
+    <Status>A Migrar</Status>
+    <EquipA>CORE-MOVEL-SP</EquipA>
+    <EquipB>MFKB1</EquipB>
+    <Rota>COREFAKE-FKBSP</Rota>
+    <EqptoAprox>5G-CORE-SP - i-br-sp-fkb-fkb-hl5d-01</EqptoAprox>
+    <Tecnologia>5G</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKBSP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>AVENIDA DOS TESTES, 200 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70010</idRota>
+    <Regional>SE</Regional>
+    <UF>SE</UF>
+    <NumEILD>91070010</NumEILD>
+    <NumOE>90010</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>RCEFAKE</EquipA>
+    <EquipB>PTY-FKB_DCN_RD</EquipB>
+    <Rota>COREFAKE-FKBSP</Rota>
+    <EqptoAprox>i-br-sp-core-core-hl3-01 - i-br-sp-fkb-fkb-hl5d-01</EqptoAprox>
+    <Tecnologia>LTE</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKBSP</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Sao Paulo (SP)</EnderecoA>
+    <EnderecoB>AVENIDA DOS TESTES, 200 () - Sao Paulo (SP)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70011</idRota>
+    <Regional>RJ</Regional>
+    <UF>RJ</UF>
+    <NumEILD>91070011</NumEILD>
+    <NumOE>90011</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>COREFAKE</EquipA>
+    <EquipB>i-fkc-01</EquipB>
+    <Rota>COREFAKE-FKCRJ</Rota>
+    <EqptoAprox>i-br-rj-core-core-hl3-01 - i-br-rj-fkc-fkc-hl5d-01</EqptoAprox>
+    <Tecnologia>null</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKCRJ</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Rio de Janeiro (RJ)</EnderecoA>
+    <EnderecoB>RUA FICTICIA, 300 () - Rio de Janeiro (RJ)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70012</idRota>
+    <Regional>RJ</Regional>
+    <UF>RJ</UF>
+    <NumEILD>91070012</NumEILD>
+    <NumOE>90012</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>RNCFAKE</EquipA>
+    <EquipB>WFKC1</EquipB>
+    <Rota>COREFAKE-FKCRJ</Rota>
+    <EqptoAprox>m-br-rj-fkc-fkc-hl4-01 - m-br-rj-fkc-fkc-hl4-01</EqptoAprox>
+    <Tecnologia>WCDMA</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKCRJ</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Rio de Janeiro (RJ)</EnderecoA>
+    <EnderecoB>RUA FICTICIA, 300 () - Rio de Janeiro (RJ)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70013</idRota>
+    <Regional>RJ</Regional>
+    <UF>RJ</UF>
+    <NumEILD>91070013</NumEILD>
+    <NumOE>90013</NumOE>
+    <Status>À Ativar</Status>
+    <EquipA>B2B.CORE</EquipA>
+    <EquipB>m-br-rj-fkc-fkc-swa-01</EquipB>
+    <Rota>COREFAKE-FKCRJ</Rota>
+    <EqptoAprox>i-br-rj-core-core-hl3-01 - i-br-rj-fkc-fkc-hl5d-01</EqptoAprox>
+    <Tecnologia>null</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKCRJ</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Rio de Janeiro (RJ)</EnderecoA>
+    <EnderecoB>RUA FICTICIA, 300 () - Rio de Janeiro (RJ)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70014</idRota>
+    <Regional>RJ</Regional>
+    <UF>RJ</UF>
+    <NumEILD>91070014</NumEILD>
+    <NumOE>90014</NumOE>
+    <Status>Ativada</Status>
+    <EquipA>RCEFAKE</EquipA>
+    <EquipB>M.RJ.FKC.FCC1</EquipB>
+    <Rota>COREFAKE-FKCRJ</Rota>
+    <EqptoAprox>INFRA_RJ - i-br-rj-fkc-fkc-hl5d-01</EqptoAprox>
+    <Tecnologia>null</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKCRJ</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Rio de Janeiro (RJ)</EnderecoA>
+    <EnderecoB>RUA FICTICIA, 300 () - Rio de Janeiro (RJ)</EnderecoB>
+  </tabConsolidado>
+  <tabConsolidado>
+    <idRota>70015</idRota>
+    <Regional>RJ</Regional>
+    <UF>RJ</UF>
+    <NumEILD>91070015</NumEILD>
+    <NumOE>90015</NumOE>
+    <Status>À Ativar</Status>
+    <EquipA>RNCFAKE</EquipA>
+    <EquipB>WFKD1</EquipB>
+    <Rota>COREFAKE-FKDRJ</Rota>
+    <EqptoAprox>RNCFAKEVRI/03 - i-br-rj-fkd-fkd-hl5g-01</EqptoAprox>
+    <Tecnologia>WCDMA</Tecnologia>
+    <SiteA>COREFAKE</SiteA>
+    <SiteB>FKDRJ</SiteB>
+    <EnderecoA>AVENIDA CENTRAL, 1 () - Rio de Janeiro (RJ)</EnderecoA>
+    <EnderecoB>ESTRADA DE TESTE, 400 () - Rio de Janeiro (RJ)</EnderecoB>
+  </tabConsolidado>
+</ROOT>

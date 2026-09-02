@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const DEFAULTS = {
-  appName:       'Visão Vivo ERB',
+  appName:       'Visão ERB',
   appSubtitle:   'Gestão de Rede',
-  pageTitle:     'Visão Vivo ERB',
+  pageTitle:     'Visão ERB',
   faviconUrl:    '',
   logoUrl:       '',
   colorPrimary:  '#7F00B2',
@@ -50,7 +50,7 @@ export function ThemeProvider({ children }) {
     document.body.style.backgroundColor = theme.colorBg;
 
     // Título da aba
-    document.title = theme.pageTitle || 'Visão Vivo ERB';
+    document.title = theme.pageTitle || 'Visão ERB';
 
     // Favicon dinâmico
     if (theme.faviconUrl) {
