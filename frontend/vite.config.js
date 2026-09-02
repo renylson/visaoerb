@@ -8,4 +8,9 @@ export default defineConfig({
     outDir: '../public/app',
     emptyOutDir: true,
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./test/setup.js'],
+    globals: true,
+  },
 });
