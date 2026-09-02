@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Upload, Radio, Settings, Layers, Network, GitFork, BarChart3, ChevronDown, ChevronRight } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
 
@@ -23,8 +24,9 @@ const navItems = [
   { label: 'Configurações',    icon: Settings, href: '/config'     },
 ];
 
-export default function Sidebar({ current }) {
+export default function Sidebar() {
   const { theme } = useTheme();
+  const { pathname: current } = useLocation();
 
   // Abre o grupo automaticamente se algum filho está ativo
   const [abertos, setAbertos] = useState(() => {
@@ -92,13 +94,13 @@ export default function Sidebar({ current }) {
                     {children.map(child => {
                       const childActive = current === child.href;
                       return (
-                        <a key={child.href} href={child.href}
+                        <Link key={child.href} to={child.href}
                            className={`flex items-center px-3 py-2 rounded-lg text-xs font-medium transition-all
                              ${childActive
                                ? 'bg-white/20 text-white'
                                : 'text-white/60 hover:bg-white/10 hover:text-white'}`}>
                           {child.label}
-                        </a>
+                        </Link>
                       );
                     })}
                   </div>
@@ -108,14 +110,14 @@ export default function Sidebar({ current }) {
           }
 
           return (
-            <a key={href} href={href}
+            <Link key={href} to={href}
                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all
                  ${active
                    ? 'bg-white/20 text-white shadow-sm'
                    : 'text-white/70 hover:bg-white/10 hover:text-white'}`}>
               <Icon size={18} />
               {label}
-            </a>
+            </Link>
           );
         })}
       </nav>

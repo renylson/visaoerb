@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './ThemeContext';
 import VisaoERB from './pages/VisaoERB';
 import VisaoMassivaERB from './pages/VisaoMassivaERB';
@@ -14,28 +15,28 @@ import RelOesAtivasEquipNaoAtivo   from './pages/RelOesAtivasEquipNaoAtivo';
 import RelOesAtivarEquipAtivo      from './pages/RelOesAtivarEquipAtivo';
 import RelServicosLegadoAtivos     from './pages/RelServicosLegadoAtivos';
 
-function Router() {
-  const path = window.location.pathname;
-  if (path === '/config'     || path.endsWith('/config'))     return <Configuracoes />;
-  if (path === '/massiva'    || path.endsWith('/massiva'))    return <VisaoMassivaERB />;
-  if (path === '/importacao' || path.endsWith('/importacao')) return <Importacao />;
-  if (path === '/topologia'  || path.endsWith('/topologia'))  return <TopologiaPage />;
-  if (path === '/vizinhos'    || path.endsWith('/vizinhos'))   return <Vizinhos />;
-  if (path.endsWith('/erb-por-equipamento'))       return <RelErbPorEquipamento />;
-  if (path.endsWith('/status-migracao-erb'))       return <RelStatusMigracaoErb />;
-  if (path.endsWith('/progresso-por-uf'))          return <RelProgressoPorUf />;
-  if (path.endsWith('/erbs-pendentes'))            return <RelErbsPendentes />;
-  if (path.endsWith('/oes-ativas-equip-nao-ativo'))return <RelOesAtivasEquipNaoAtivo />;
-  if (path.endsWith('/oes-a-ativar-equip-ativo'))  return <RelOesAtivarEquipAtivo />;
-  if (path.endsWith('/servicos-legado-ativos'))    return <RelServicosLegadoAtivos />;
-  if (path === '/relatorios' || path.endsWith('/relatorios')) return <Relatorios />;
-  return <VisaoERB />;
-}
-
 export default function App() {
   return (
     <ThemeProvider>
-      <Router />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<VisaoERB />} />
+          <Route path="/massiva" element={<VisaoMassivaERB />} />
+          <Route path="/topologia" element={<TopologiaPage />} />
+          <Route path="/vizinhos" element={<Vizinhos />} />
+          <Route path="/importacao" element={<Importacao />} />
+          <Route path="/config" element={<Configuracoes />} />
+          <Route path="/relatorios" element={<Relatorios />} />
+          <Route path="/relatorios/erb-por-equipamento" element={<RelErbPorEquipamento />} />
+          <Route path="/relatorios/status-migracao-erb" element={<RelStatusMigracaoErb />} />
+          <Route path="/relatorios/progresso-por-uf" element={<RelProgressoPorUf />} />
+          <Route path="/relatorios/erbs-pendentes" element={<RelErbsPendentes />} />
+          <Route path="/relatorios/oes-ativas-equip-nao-ativo" element={<RelOesAtivasEquipNaoAtivo />} />
+          <Route path="/relatorios/oes-a-ativar-equip-ativo" element={<RelOesAtivarEquipAtivo />} />
+          <Route path="/relatorios/servicos-legado-ativos" element={<RelServicosLegadoAtivos />} />
+          <Route path="*" element={<VisaoERB />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

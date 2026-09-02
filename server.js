@@ -11,11 +11,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// API routes (antes do static para não serem interceptadas)
-app.use('/upload',    uploadRouter);
-app.use('/visao',     visaoRouter);
-app.use('/topologia',  topologiaRouter);
-app.use('/relatorios',     relatoriosRouter);
+// API routes, todas sob /api para nunca colidir com rotas do SPA
+// (ex: a página /relatorios do frontend vs. o prefixo de API /relatorios/*)
+app.use('/api/upload',     uploadRouter);
+app.use('/api/visao',      visaoRouter);
+app.use('/api/topologia',  topologiaRouter);
 app.use('/api/relatorios', relatoriosRouter);
 
 // Serve o build do React como raiz

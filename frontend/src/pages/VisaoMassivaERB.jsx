@@ -73,7 +73,7 @@ export default function VisaoMassivaERB() {
     setExpanded(new Set());
     setFilterUf('');
     try {
-      const res  = await fetch(`/visao/massiva/${encodeURIComponent(eqpto)}`);
+      const res  = await fetch(`/api/visao/massiva/${encodeURIComponent(eqpto)}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.erro || 'Erro desconhecido');
       if (data.total === 0) setErro(`Nenhuma OE encontrada com eqpto_final = "${eqpto}".`);
@@ -127,7 +127,7 @@ export default function VisaoMassivaERB() {
 
   return (
     <div className="flex min-h-screen" style={{ background: theme.colorBg }}>
-      <Sidebar current="/app/massiva" />
+      <Sidebar />
 
       <main className="ml-60 flex-1 flex flex-col min-h-screen">
         {/* Header */}

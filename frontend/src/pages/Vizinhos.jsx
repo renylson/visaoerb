@@ -70,7 +70,7 @@ function HostnameCombobox({ value, onChange, placeholder, autoFocus }) {
     if (!q.trim()) { setOpts([]); return; }
     timer.current = setTimeout(async () => {
       setLoading(true);
-      try { const r = await fetch(`/topologia/buscar?q=${encodeURIComponent(q)}`); setOpts(await r.json()); }
+      try { const r = await fetch(`/api/topologia/buscar?q=${encodeURIComponent(q)}`); setOpts(await r.json()); }
       finally { setLoading(false); }
     }, 250);
   };
@@ -127,7 +127,7 @@ async function fetchEquipInfo(hostname) {
   if (equipCache[hostname] !== undefined) return equipCache[hostname];
   equipCache[hostname] = null; // marca como carregando
   try {
-    const r = await fetch(`/topologia/buscar?q=${encodeURIComponent(hostname)}`);
+    const r = await fetch(`/api/topologia/buscar?q=${encodeURIComponent(hostname)}`);
     const list = await r.json();
     const found = list.find(e => e.sigla === hostname) || null;
     equipCache[hostname] = found;
@@ -408,7 +408,7 @@ export default function Vizinhos() {
 
   const carregarRelacoes = async (eq) => {
     if (!eq) { setRelacoes([]); return; }
-    const r = await fetch(`/topologia/listar?equipamento=${encodeURIComponent(eq)}`);
+    const r = await fetch(`/api/topologia/listar?equipamento=${encodeURIComponent(eq)}`);
     setRelacoes(await r.json());
   };
 
@@ -419,7 +419,7 @@ export default function Vizinhos() {
     setLoadingErb(true); setBuscouErb(false);
     const p = new URLSearchParams({ sigla: siglaErb.trim() });
     if (ufErb.trim()) p.set('uf', ufErb.trim());
-    const r = await fetch(`/topologia/por-erb?${p}`);
+    const r = await fetch(`/api/topologia/por-erb?${p}`);
     setEquipsErb(await r.json());
     setBuscouErb(true); setLoadingErb(false);
   };
@@ -432,7 +432,7 @@ export default function Vizinhos() {
       ? { equipamento: outroHostname, upstream: equipamento, porta_equipamento: portaEquip, porta_upstream: portaUpstream }
       : { equipamento, upstream: outroHostname, porta_equipamento: portaEquip, porta_upstream: portaUpstream };
     try {
-      const res = await fetch('/topologia', {
+      const res = await fetch('/api/topologia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -446,13 +446,13 @@ export default function Vizinhos() {
   };
 
   const removerRelacao = async (id) => {
-    await fetch(`/topologia/${id}`, { method: 'DELETE' });
+    await fetch(`/api/topologia/${id}`, { method: 'DELETE' });
     carregarRelacoes(equipamento);
   };
 
   // Edita porta de um lado específico da relação (PATCH pelo id)
   const editarPorta = async (id, campo, valor) => {
-    await fetch(`/topologia/${id}`, {
+    await fetch(`/api/topologia/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ [campo]: valor }),
@@ -467,7 +467,7 @@ export default function Vizinhos() {
 
   return (
     <div className="flex min-h-screen" style={{ background: theme.colorBg }}>
-      <Sidebar current="/vizinhos" />
+      <Sidebar />
       <main className="ml-60 flex-1 flex flex-col min-h-screen">
 
         <header className="sticky top-0 z-30 backdrop-blur border-b px-8 py-4"

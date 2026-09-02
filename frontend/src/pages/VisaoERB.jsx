@@ -123,7 +123,7 @@ export default function VisaoERB() {
   const [loadingUfs, setLoadingUfs] = useState(true);
 
   useEffect(() => {
-    fetch('/visao/ufs')
+    fetch('/api/visao/ufs')
       .then(r => r.json())
       .then(data => setUfs(data))
       .catch(() => setErro('Erro ao carregar UFs.'))
@@ -132,7 +132,7 @@ export default function VisaoERB() {
 
   useEffect(() => {
     if (!uf) { setSiglas([]); setSigla(''); setNomeSite(''); return; }
-    fetch(`/visao/siglas?uf=${uf}`)
+    fetch(`/api/visao/siglas?uf=${uf}`)
       .then(r => r.json())
       .then(data => setSiglas(data))
       .catch(() => {});
@@ -148,7 +148,7 @@ export default function VisaoERB() {
     setResultado(null);
     try {
       const params = nomeSite ? `?nome_site=${encodeURIComponent(nomeSite)}` : '';
-      const res  = await fetch(`/visao/${uf}/${sigla}${params}`);
+      const res  = await fetch(`/api/visao/${uf}/${sigla}${params}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.erro || 'Erro desconhecido');
       setResultado(data);
@@ -162,7 +162,7 @@ export default function VisaoERB() {
 
   return (
     <div className="flex min-h-screen bg-[#0A0A0A]">
-      <Sidebar current="/" />
+      <Sidebar />
 
       <main className="ml-60 flex-1 flex flex-col min-h-screen">
         {/* Header */}

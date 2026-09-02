@@ -77,7 +77,7 @@ export default function Configuracoes() {
 
   return (
     <div className="flex min-h-screen" style={{ background: theme.colorBg }}>
-      <Sidebar current="/config" />
+      <Sidebar />
 
       <main className="ml-60 flex-1 flex flex-col">
         <header className="sticky top-0 z-30 backdrop-blur border-b px-8 py-4"

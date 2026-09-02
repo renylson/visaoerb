@@ -17,7 +17,7 @@ export default function Importacao() {
   const tickerRef = useRef();
 
   useEffect(() => {
-    fetch('/upload/tabelas')
+    fetch('/api/upload/tabelas')
       .then(r => r.json())
       .then(data => { setTabelas(data); if (data.length) setTabela(data[0].key); })
       .catch(() => {});
@@ -48,7 +48,7 @@ export default function Importacao() {
     try {
       const fd = new FormData();
       fd.append('arquivo', arquivo);
-      const res  = await fetch(`/upload/${tabela}`, { method: 'POST', body: fd });
+      const res  = await fetch(`/api/upload/${tabela}`, { method: 'POST', body: fd });
       const data = await res.json();
       clearInterval(tickerRef.current);
       setProgresso(100);
@@ -69,7 +69,7 @@ export default function Importacao() {
 
   return (
     <div className="flex min-h-screen" style={{ background: theme.colorBg }}>
-      <Sidebar current="/importacao" />
+      <Sidebar />
 
       <main className="ml-60 flex-1 flex flex-col min-h-screen">
         <header className="sticky top-0 z-30 backdrop-blur border-b px-8 py-4"

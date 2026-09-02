@@ -34,7 +34,7 @@ function BuscaCombobox({ value, onChange, onConsultar, loading }) {
     if (!q.trim()) { setOpts([]); return; }
     timer.current = setTimeout(async () => {
       setSearching(true);
-      try { const r = await fetch(`/topologia/buscar?q=${encodeURIComponent(q)}`); setOpts(await r.json()); }
+      try { const r = await fetch(`/api/topologia/buscar?q=${encodeURIComponent(q)}`); setOpts(await r.json()); }
       finally { setSearching(false); }
     }, 250);
   };
@@ -626,7 +626,7 @@ export default function TopologiaPage() {
     setGrafo(null);
     setNoSelecionado(null);
     try {
-      const res  = await fetch(`/topologia/${encodeURIComponent(h)}`);
+      const res  = await fetch(`/api/topologia/${encodeURIComponent(h)}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.erro);
       if (data.nos.length === 0) { setErro('Nenhuma relação cadastrada para este equipamento.'); }
@@ -647,7 +647,7 @@ export default function TopologiaPage() {
 
   return (
     <div className="flex min-h-screen" style={{ background: theme.colorBg }}>
-      <Sidebar current="/topologia" />
+      <Sidebar />
       <main className="ml-60 flex-1 flex flex-col min-h-screen">
 
         {/* Header */}
