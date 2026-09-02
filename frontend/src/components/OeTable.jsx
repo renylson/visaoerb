@@ -43,16 +43,16 @@ export default function OeTable({ oe }) {
   const [filterTipo, setFilterTipo] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
 
-  if (!oe?.length) return null;
-
-  const tipos    = [...new Set(oe.map(r => r.tipo_servico))].sort();
-  const statuses = [...new Set(oe.map(r => r.status))].sort();
-
-  let filtered = oe;
+  let filtered = oe || [];
   if (filterTipo)   filtered = filtered.filter(r => r.tipo_servico === filterTipo);
   if (filterStatus) filtered = filtered.filter(r => r.status === filterStatus);
 
   const { sortField, handleSort, sortedRows } = useSortableTable(filtered);
+
+  if (!oe?.length) return null;
+
+  const tipos    = [...new Set(oe.map(r => r.tipo_servico))].sort();
+  const statuses = [...new Set(oe.map(r => r.status))].sort();
   const rows = sortedRows;
 
   // Contadores por tipo

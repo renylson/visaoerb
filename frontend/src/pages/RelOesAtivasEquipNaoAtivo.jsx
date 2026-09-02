@@ -1,10 +1,8 @@
 import { AlertTriangle } from 'lucide-react';
 import RelatorioBase from '../components/RelatorioBase';
 import OeReportTable from '../components/OeReportTable';
-import { useTheme } from '../ThemeContext';
 
 export default function RelOesAtivasEquipNaoAtivo() {
-  const { theme } = useTheme();
   return (
     <RelatorioBase
       titulo="OEs Ativas · Eqptos Não Ativos"

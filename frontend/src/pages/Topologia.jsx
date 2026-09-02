@@ -15,7 +15,7 @@ import { useTheme } from '../ThemeContext';
 import { statusEquipTextClass, tipoEquip, TIPO_EQUIP_CONFIG as TIPO_CONFIG } from '../lib/status';
 
 // Combobox com autocomplete para busca por hostname
-function BuscaCombobox({ value, onChange, onConsultar, loading }) {
+function BuscaCombobox({ value, onChange, onConsultar }) {
   const [query, setQuery]   = useState('');
   const [opts, setOpts]     = useState([]);
   const [open, setOpen]     = useState(false);
@@ -246,8 +246,7 @@ function buildGraph(nos, arestas, onSelect) {
     }
   }
 
-  const todosNos     = [...nos, ...erbNos];
-  const todasArestas = [...arestas, ...erbArestas];
+  const todosNos = [...nos, ...erbNos];
 
   function tipoNo(id) {
     return nos.find(x => x.id === id)?.tipo || 'outro';
@@ -318,7 +317,6 @@ function buildGraph(nos, arestas, onSelect) {
 
     if (ehRaiz) {
       // ERBs à direita, empilhadas verticalmente centradas no Y do pai
-      const totalH = erbs.length * ERB_W + (erbs.length - 1) * (ERB_GAP_V - ERB_W);
       const startY = paiPos.y - (erbs.length - 1) * ERB_GAP_V / 2;
       erbs.forEach((erb, i) => {
         posMap[erb.id] = {
@@ -646,7 +644,7 @@ export default function TopologiaPage() {
                     Hostname do equipamento
                   </label>
                   <BuscaCombobox value={busca} onChange={setBusca}
-                                 onConsultar={consultar} loading={loading} />
+                                 onConsultar={consultar} />
                 </div>
                 <button onClick={() => consultar()} disabled={!busca.trim() || loading}
                         className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white

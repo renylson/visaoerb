@@ -43,7 +43,7 @@ function ColorPicker({ label, value, onChange }) {
 }
 
 export default function Configuracoes() {
-  const { theme, setTheme, resetTheme, DEFAULTS } = useTheme();
+  const { theme, setTheme, resetTheme } = useTheme();
   const [saved, setSaved] = useState(false);
   const [logoPreview, setLogoPreview] = useState(theme.logoUrl || '');
   const fileRef    = useRef();

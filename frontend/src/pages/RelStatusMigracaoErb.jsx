@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { GitMerge, ArrowUpDown } from 'lucide-react';
 import RelatorioBase from '../components/RelatorioBase';
-import { useTheme } from '../ThemeContext';
 
 function BarraDupla({ fusion, legado, total }) {
   const pF = total > 0 ? (fusion / total) * 100 : 0;
@@ -15,7 +14,6 @@ function BarraDupla({ fusion, legado, total }) {
 }
 
 export default function RelStatusMigracaoErb() {
-  const { theme } = useTheme();
   const [sortField, setSortField] = useState('legado_ativo');
   const [sortDir, setSortDir]     = useState('desc');
 

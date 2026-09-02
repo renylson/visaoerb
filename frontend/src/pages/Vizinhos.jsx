@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { GitFork, Search, Loader2, X, Trash2, Plus, CheckCircle2, AlertCircle, ArrowUp, ArrowDown } from 'lucide-react';
+import { GitFork, Search, Loader2, X, Plus, CheckCircle2, AlertCircle, ArrowUp, ArrowDown } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import { useTheme } from '../ThemeContext';
 import { tipoEquip, TIPO_EQUIP_CONFIG as TIPO_EQUIP } from '../lib/status';
@@ -561,31 +561,29 @@ export default function Vizinhos() {
                 )}
 
                 {/* UPSTREAMS REAIS — acima */}
-                {(upstreamsReais.length > 0 || true) && (
-                  <div className="flex flex-col items-center mb-2">
-                    <div className="text-xs font-semibold text-[#22C55E]/70 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                      <ArrowUp size={12}/> Upstream
-                    </div>
-                    <div className="flex items-start gap-6 flex-wrap justify-center">
-                      {upstreamsAgrupados.map(({ hostname: h, rows }) => (
-                        <No key={h} hostname={h} tipoCentral={tipo}
-                            links={rows.map(r => ({
-                              id: r.id,
-                              portaLocal: r.porta_upstream,
-                              portaRemota: r.porta_equipamento,
-                              onEditLocal:  v => editarPorta(r.id, 'porta_upstream', v),
-                              onEditRemota: v => editarPorta(r.id, 'porta_equipamento', v),
-                              onRemove: () => removerRelacao(r.id),
-                            }))} />
-                      ))}
-                      <NoAdicionar label="+ Upstream"
-                                   tipoCentral={tipo}
-                                   hostnameCentral={equipamento}
-                                   onConfirm={(h, pe, pu) => salvarRelacao(h, pe, pu, false)} />
-                    </div>
-                    <Seta dir="down" />
+                <div className="flex flex-col items-center mb-2">
+                  <div className="text-xs font-semibold text-[#22C55E]/70 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                    <ArrowUp size={12}/> Upstream
                   </div>
-                )}
+                  <div className="flex items-start gap-6 flex-wrap justify-center">
+                    {upstreamsAgrupados.map(({ hostname: h, rows }) => (
+                      <No key={h} hostname={h} tipoCentral={tipo}
+                          links={rows.map(r => ({
+                            id: r.id,
+                            portaLocal: r.porta_upstream,
+                            portaRemota: r.porta_equipamento,
+                            onEditLocal:  v => editarPorta(r.id, 'porta_upstream', v),
+                            onEditRemota: v => editarPorta(r.id, 'porta_equipamento', v),
+                            onRemove: () => removerRelacao(r.id),
+                          }))} />
+                    ))}
+                    <NoAdicionar label="+ Upstream"
+                                 tipoCentral={tipo}
+                                 hostnameCentral={equipamento}
+                                 onConfirm={(h, pe, pu) => salvarRelacao(h, pe, pu, false)} />
+                  </div>
+                  <Seta dir="down" />
+                </div>
 
                 {/* LINHA CENTRAL: vizinhos ── central ── vizinhos */}
                 <div className="flex items-center justify-center gap-0">
@@ -618,7 +616,7 @@ export default function Vizinhos() {
                   {/* NÓ CENTRAL — agrupa relações por vizinho, mostra porta central de cada link */}
                   <No hostname={equipamento} isCentral
                       relacoes={[
-                        ...upstreamsAgrupados.flatMap(({ hostname: h, rows }, gi) =>
+                        ...upstreamsAgrupados.flatMap(({ hostname: h, rows }) =>
                           rows.map((r, i) => ({
                             id: r.id, outro: h,
                             showLabel: i === 0,

@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
 import request from 'supertest';
 
 const app = require('../app');
-const { pool, setupDatabase, limparTabelas, inserirErb, inserirEquipamento, inserirOe } = require('./dbHelper');
+const { pool, setupDatabase, limparTabelas, inserirEquipamento, inserirOe } = require('./dbHelper');
 
 describe('routes/relatorios', () => {
   beforeAll(async () => {

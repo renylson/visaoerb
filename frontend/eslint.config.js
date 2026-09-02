@@ -8,6 +8,7 @@ export default defineConfig([
   globalIgnores(['dist']),
   {
     files: ['**/*.{js,jsx}'],
+    ignores: ['test/**'],
     extends: [
       js.configs.recommended,
       reactHooks.configs.flat.recommended,
@@ -15,6 +16,14 @@ export default defineConfig([
     ],
     languageOptions: {
       globals: globals.browser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+  },
+  {
+    files: ['test/**/*.{js,jsx}'],
+    extends: [js.configs.recommended, reactHooks.configs.flat.recommended],
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node, ...globals.vitest },
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
