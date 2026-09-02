@@ -1,22 +1,9 @@
 const express = require('express');
 const { pool } = require('../db');
-const { classificarServico } = require('../services/classificar');
+const { classificarServico, tipoEquip } = require('../services/classificar');
 const { handleRouteError } = require('../lib/handleRouteError');
 
 const router = express.Router();
-
-// Detecta o tipo do equipamento pelo sufixo
-function tipoEquip(hostname) {
-  if (!hostname) return 'outro';
-  const h = hostname.toLowerCase();
-  if (h.includes('-hl4-'))  return 'hl4';
-  if (h.includes('-hl5d-')) return 'hl5d';
-  if (h.includes('-hl5g-')) return 'hl5g';
-  if (h.includes('-gwc-'))  return 'gwc';
-  if (h.includes('-gwd-'))  return 'gwd';
-  if (h.includes('-gws-'))  return 'gws';
-  return 'outro';
-}
 
 // GET /topologia/buscar?q=texto — autocomplete por hostname
 router.get('/buscar', async (req, res) => {

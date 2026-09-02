@@ -1,21 +1,9 @@
 const express = require('express');
 const { pool } = require('../db');
 const { handleRouteError } = require('../lib/handleRouteError');
+const { classificarServico, tipoEquip } = require('../services/classificar');
 
 const router = express.Router();
-
-// Detecta tipo pelo hostname
-function tipoEquip(h) {
-  if (!h) return 'outro';
-  const s = h.toLowerCase();
-  if (s.includes('-hl4-'))  return 'hl4';
-  if (s.includes('-hl5d-')) return 'hl5d';
-  if (s.includes('-hl5g-')) return 'hl5g';
-  if (s.includes('-gwc-'))  return 'gwc';
-  if (s.includes('-gwd-'))  return 'gwd';
-  if (s.includes('-gws-'))  return 'gws';
-  return 'outro';
-}
 
 // GET /relatorios/ufs — lista UFs distintas disponíveis
 router.get('/ufs', async (_req, res) => {
@@ -104,23 +92,6 @@ function ufWhere(uf, params, alias = 'o') {
   if (!uf) return '';
   params.push(uf.toUpperCase());
   return `AND ${alias}.uf_sigla_erb = $${params.length}`;
-}
-
-// Helper: classifica tipo de serviço pelo equip_b
-function classificarServico(equipB) {
-  if (!equipB) return 'Outros';
-  const v = equipB.trim();
-  const partes = v.split('-');
-  if (partes.length === 7 && partes[5]?.toLowerCase() === 'swa') return 'SWA';
-  if (v.includes('FCC'))  return 'Gerência Fonte';
-  if (v.includes('DCN'))  return 'DCN Rádio';
-  const ini = v[0]?.toUpperCase();
-  if (ini === 'I') return '2G';
-  if (ini === 'W') return '3G';
-  if (ini === 'T') return '4G';
-  if (ini === 'S') return '5G';
-  if (ini === 'M') return 'MULTISERVIÇO (3G+4G+5G)';
-  return 'Outros';
 }
 
 const FUSION_LIKE  = `(o.eqpto_final ILIKE '%-hl5d-%' OR o.eqpto_final ILIKE '%-hl5g-%')`;
