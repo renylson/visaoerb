@@ -1,11 +1,19 @@
 # Visão ERB
 
-Aplicação web para gestão e visualização de infraestrutura de rede: sites (ERBs),
-equipamentos de transporte, ordens de execução (OEs) e a topologia de dependências
-entre eles. Dado o histórico de um site (sigla + UF), a aplicação cruza os
-cadastros de equipamento com o status das OEs e sinaliza inconsistências —
-por exemplo, uma OE marcada como "Ativada" cujo equipamento final ainda está
-"Desativado".
+![CI](https://github.com/renylson/visaoerb/actions/workflows/ci.yml/badge.svg)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+
+Aplicação full-stack para gestão e visualização de infraestrutura de rede: sites
+(ERBs), equipamentos de transporte, ordens de execução (OEs) e a topologia de
+dependências entre eles. Dado o histórico de um site (sigla + UF), a aplicação
+cruza os cadastros de equipamento com o status das OEs e sinaliza
+inconsistências — por exemplo, uma OE marcada como "Ativada" cujo equipamento
+final ainda está "Desativado".
+
+O domínio é o mesmo que trabalho no dia a dia como técnico em telecomunicações
+na Vivo (redes móveis 3G/4G/5G, transporte, equipamentos Huawei/Cisco/Nokia):
+este projeto nasceu de uma necessidade operacional real e depois virou minha
+peça de portfólio para desenvolvimento backend.
 
 ![Tela de consulta de um site, cruzando equipamentos e serviços](docs/screenshot-visao-erb.png)
 
@@ -166,3 +174,12 @@ seed/           dataset sintético para popular a demo
 test/           testes de integração do backend (vitest + supertest)
 frontend/test/  testes de componentes/hooks do frontend
 ```
+
+## Sobre mim
+
+Técnico em telecomunicações com quase 9 anos de Vivo (Telefônica Brasil),
+migrando para desenvolvimento backend. Mais projetos e contato:
+
+- 🌐 [renylson.com.br](https://renylson.com.br)
+- 💼 [linkedin.com/in/renylsonmarques](https://www.linkedin.com/in/renylsonmarques/)
+- 📫 [renylsonm@gmail.com](mailto:renylsonm@gmail.com)
