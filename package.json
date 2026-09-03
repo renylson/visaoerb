@@ -1,17 +1,17 @@
 {
-  "name": "visaovivoerb",
+  "name": "visaoerb",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Gestão de infraestrutura de rede: ERBs, equipamentos, OEs e topologia",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["erb", "rede", "telecom", "express", "react", "postgresql"],
+  "author": "Renylson Marques Rodrigues",
+  "license": "MIT",
   "dependencies": {
     "csv-parse": "^6.2.1",
     "dotenv": "^17.4.2",
